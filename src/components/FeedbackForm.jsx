@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 const BACKENDURI = import.meta.env.VITE_BACKEND_URI;
+const BackupURI = import.meta.env.VITE_BACKEND_SYNC;
 import toast from "react-hot-toast";
 const FeedbackForm = ({ getFeedback, login }) => {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ const FeedbackForm = ({ getFeedback, login }) => {
     e.preventDefault();
     const submitFeedback = async () => {
       const response = await fetch(
-        `${BACKENDURI}/api/v1/feedback/submitFeedback`,
+        `${BackupURI}/api/v1/feedback/submitFeedback`,
         {
           method: "POST",
           headers: {
@@ -34,8 +35,7 @@ const FeedbackForm = ({ getFeedback, login }) => {
 
     toast.promise(submitFeedback(), {
       loading: "Submitting feedback...",
-      success: (data) => {
-        console.log(data);
+      success: () => {
         setFormData({
           name: login?.name || "",
           email: login?.email || "",
