@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 const BACKENDURI = import.meta.env.VITE_BACKEND_URI;
-const FeedbackForm = ({ login }) => {
+import toast from "react-hot-toast";
+const FeedbackForm = ({ getFeedback, login }) => {
   const [formData, setFormData] = useState({
     name: login?.name || "",
     email: login?.email || "",
@@ -26,9 +27,19 @@ const FeedbackForm = ({ login }) => {
         }
       );
       const data = await response.json();
-      console.log(data); // Process the response data as needed
+      console.log(data);
+      setFormData({
+        name: login?.name || "",
+        email: login?.email || "",
+        summary: "",
+        idea: "",
+        topic: "",
+      });
+      toast.success("ThankYou For your Feedback");
+      getFeedback();
     } catch (error) {
       console.error("Error submitting form:", error);
+      toast.error("Some error has occured");
     }
   };
   return (
@@ -52,7 +63,7 @@ const FeedbackForm = ({ login }) => {
         required
         onChange={handleChange}
         placeholder='Why your Idea is useful, who would benefit and how it should work?'
-        className='border resize-none border-black px-3 py-2 rounded-md w-full'
+        className='border min-h-44 resize-none border-black px-3 py-2 rounded-md w-full'
       />
       <p className='w-full'>Please select the topic for your feedback :</p>
       <div className='flex flex-col md:flex-row px-2 gap-2 w-full mb-3'>
@@ -65,7 +76,7 @@ const FeedbackForm = ({ login }) => {
             name='topic'
             value='topic_1djxlq13'
             onChange={handleChange}
-            checked={formData.topic === "Product Features ⚙️"}
+            checked={formData.topic === "topic_1djxlq13"}
           />
           <label
             htmlFor='features'
@@ -82,7 +93,7 @@ const FeedbackForm = ({ login }) => {
             name='topic'
             value='topic_5d9ok81d'
             onChange={handleChange}
-            checked={formData.topic === "Product Pricing 💰"}
+            checked={formData.topic === "topic_5d9ok81d"}
           />
           <label
             className='border hover:scale-105 bg-white duration-150 rounded-md px-3 py-1 peer-checked:bg-green-200'
@@ -99,7 +110,7 @@ const FeedbackForm = ({ login }) => {
             name='topic'
             value='topic_63p08yev'
             onChange={handleChange}
-            checked={formData.topic === "Product Usablity 💁‍♂️"}
+            checked={formData.topic === "topic_63p08yev"}
           />
           <label
             className='border hover:scale-105 bg-white duration-150 rounded-md px-3 py-1 peer-checked:bg-red-200'
