@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FeedbackForm from "./components/FeedbackForm";
 import LoginScreen from "./components/LoginScreen";
 import { googleLogout } from "@react-oauth/google";
 function App() {
   const [login, setLogin] = useState(false);
+  useEffect(() => {
+    if (login) {
+      localStorage.setItem("loginInfo", JSON.stringify(login));
+    } else {
+      const data = localStorage.getItem("loginInfo");
+      setLogin(JSON.parse(data));
+    }
+  }, [login]);
 
   return login ? (
     <main className='min-h-screen flex flex-col gap-4 items-center p-3'>
