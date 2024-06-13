@@ -1,8 +1,33 @@
-# React + Vite
+# Feedback Web frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+login via google Oauth2 to submit feedbacks
 
-Currently, two official plugins are available:
+## setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+npm install
+```
+
+note setup backend before deploying frontend
+for more info about the backend service visit: [Backend Source code](https://github.com/yesrab/feedback-micro-service)
+
+# env variables
+
+```
+VITE_BACKEND_URI=http://127.0.0.1:7000 <backend URI>
+VITE_CLIENT_ID=109xxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com <google Oauht Client ID >
+
+```
+
+# run dev
+
+```
+npm run dev
+```
+
+# build for production
+
+```
+npm build
+```
+
