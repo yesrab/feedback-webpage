@@ -15,7 +15,7 @@ const FeedbackForm = ({ getFeedback, login }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+    const submitFeedback = async () => {
       const response = await fetch(
         `${BACKENDURI}/api/v1/feedback/submitFeedback`,
         {
@@ -26,21 +26,28 @@ const FeedbackForm = ({ getFeedback, login }) => {
           body: JSON.stringify(formData),
         }
       );
-      const data = await response.json();
-      console.log(data);
-      setFormData({
-        name: login?.name || "",
-        email: login?.email || "",
-        summary: "",
-        idea: "",
-        topic: "",
-      });
-      toast.success("ThankYou For your Feedback");
-      getFeedback();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error("Some error has occured");
-    }
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    };
+
+    toast.promise(submitFeedback(), {
+      loading: "Submitting feedback...",
+      success: (data) => {
+        console.log(data);
+        setFormData({
+          name: login?.name || "",
+          email: login?.email || "",
+          summary: "",
+          idea: "",
+          topic: "",
+        });
+        getFeedback();
+        return "Thank you for your feedback!";
+      },
+      error: (err) => `Error submitting form: ${err.toString()}`,
+    });
   };
   return (
     <form
