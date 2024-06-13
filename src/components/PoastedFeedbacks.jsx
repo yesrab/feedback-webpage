@@ -4,7 +4,7 @@ const PoastedFeedbacks = ({ data }) => {
   return (
     <div className='w-full flex flex-col items-center gap-4'>
       <h4 className='text-3xl text-center'>All feedbacks</h4>
-      {data?.reverse().map((item) => {
+      {data?.map((item) => {
         return (
           <div
             key={item.idx}
@@ -13,7 +13,7 @@ const PoastedFeedbacks = ({ data }) => {
             <p className=''>Idea: {item.description}</p>
             <div>
               Topic:
-              {item.topics.map((item, key) => {
+              {item?.topics?.map((item, key) => {
                 return (
                   <span
                     className={`mx-3 p-1 rounded-md ${
