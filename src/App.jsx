@@ -16,6 +16,7 @@ function App() {
       setAllFeedback(data);
     } catch (error) {
       console.error(error);
+      setAllFeedback(null);
     }
   };
   useEffect(() => {
@@ -25,7 +26,7 @@ function App() {
       const data = localStorage.getItem("loginInfo");
       setLogin(JSON.parse(data));
     }
-
+    fetch('https://feedback-micro-service.onrender.com/')
     getFeedbacks();
   }, [login]);
 
