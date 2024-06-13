@@ -18,7 +18,7 @@ const FeedbackForm = ({ getFeedback, login }) => {
     e.preventDefault();
     const submitFeedback = async () => {
       const response = await fetch(
-        `${BackupURI}/api/v1/feedback/submitFeedback`,
+        `${BACKENDURI}/api/v1/feedback/submitFeedback`,
         {
           method: "POST",
           headers: {
