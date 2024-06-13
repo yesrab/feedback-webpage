@@ -13,12 +13,12 @@ const PoastedFeedbacks = ({ data }) => {
               className='border flex flex-col gap-4 p-2 rounded-md w-full md:w-[70%]'>
               <h3 className='text-2xl '>Title: {item.name}</h3>
               <p className=''>Idea: {item.description}</p>
-              <div>
+              <div className='flex flex-wrap items-center gap-2'>
                 Topic:
                 {item?.topics?.map((item, key) => {
                   return (
                     <span
-                      className={`mx-3 p-1 rounded-md ${
+                      className={`p-1 rounded-md ${
                         item.trim() == "Product Features ⚙️"
                           ? "bg-blue-200"
                           : item.trim() == "Product Pricing 💰"
